@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		id="myPopover"
+		title="Case Description"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom"
+		initialFocus="email">
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button
+					id="email"
+					text="Close"
+					press="closeButtonPress" />
+			</OverflowToolbar>
+		</footer>
+		<VBox 
+			width="20rem">
+			<Text 
+				text="{myODataModel>/SelectedText}"/> 
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

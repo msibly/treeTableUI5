@@ -1,0 +1,100 @@
+<mvc:View
+    controllerName="project1.controller.View1"
+    xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    height="100%">
+    <m:Page
+        class="sapUiResponsiveContentPadding"
+        title="Legal check"
+        showHeader="true"
+        enableScrolling="false"
+        >
+        <m:content>
+            <m:VBox
+            width="100%"
+            >
+
+                <m:Label 
+                    class="sapUiTinyMargin"    
+                    text="Enter a search term, e.g.Active, " 
+                    width="100%" 
+                    labelFor="multiInput"
+                />         
+
+                <m:MultiInput width="70%"
+                    showClearIcon="true"
+                    placeholder="try 'Active' or 'Disposed'"
+                    id="multiInput"
+                    suggestionItems="{
+                        path: 'myODataModel>/tokensData'}"
+                    showValueHelp="false"
+                    tokenUpdate="onSearchTags">
+                    <core:Item key="{myODataModel>key}" text="{myODataModel>text}"/>
+                </m:MultiInput>                                    
+
+                <TreeTable
+                    class="sapUiTinyMargin"
+                    id="TreeTableBasic"
+                    rows="{myODataModel>/fRows}"
+                    selectionMode="MultiToggle"
+                    enableSelectAll="false"
+                    ariaLabelledBy="title">
+                    <extension>
+                        <m:OverflowToolbar style="Clear">
+                            <m:Title id="title" text="Clothing"/>
+                            <m:ToolbarSpacer/>
+                            <m:Button text="Collapse all" press="onCollapseAll"/>
+                            <m:Button text="Collapse selection" press="onCollapseSelection"/>
+                            <m:Button text="Expand first level" press="onExpandFirstLevel"/>
+                            <m:Button text="Expand selection" press="onExpandSelection"/>
+                        </m:OverflowToolbar>
+                    </extension>
+                    <columns>
+                        <Column width="auto">
+                            <m:Label text="Categories"/>
+                            <template>
+                                <m:Text text="{myODataModel>name}" wrapping="false" />
+                            </template>
+                        </Column>
+                        <Column width="auto">
+                            <m:Label text="Case No. &amp; Description"/>
+                            <template>
+                                <m:VBox>
+                                    <!-- <m:Text text="{myODataModel>caseNumber}" wrapping="false" />                    -->
+                                    <m:Link text="{myODataModel>description}" target="_blank" press="handlePopoverPress"/>                                                                 
+                                </m:VBox>
+                            </template>
+                        </Column>
+                        <Column width="auto">
+                            <m:Label text="Category"/>
+                            <template>
+                                <m:Text text="{myODataModel>category}" wrapping="false" />
+                            </template>
+                        </Column>
+                        <Column width="auto">
+                            <m:Label text="Status"/>
+                            <template>
+                                <m:Text text="{myODataModel>status}" wrapping="false" />
+                            </template>
+                        </Column>        
+                        <Column width="auto">
+                            <m:Label text="Severity"/>
+                            <template>
+                                <m:Text text="{myODataModel>severity}" wrapping="false" />
+                            </template>
+                        </Column>  
+                        <Column width="auto">
+                            <m:Label text="Reamrks"/>
+                            <template>
+                                <m:Text text="{myODataModel>remarks}" wrapping="false" />
+                            </template>
+                        </Column>                                                     
+                    </columns>
+                </TreeTable>
+            </m:VBox>
+        </m:content>
+    </m:Page>
+</mvc:View>
